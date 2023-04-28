@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Movies</h1>
+  {% comment %} {% for genre in genres %}
+    <button class="m-1">
+      <a href="{% url 'movies:recommended' genre.pk %}">
+        {{genre.name}}
+      </a>
+    </button> {% endcomment %}
+    {% comment %} <button class="m-1">
+      <a href="{% url 'movies:recommended' %}">
+        {{genre.name}}
+      </a>
+    </button> {% endcomment %}
+  {% comment %} {% endfor %} {% endcomment %}
+  <br>
+  {% for movie in movies %}
+  <img src="{{movie.poster_path}}" alt="" style="width: 200px; height: 300px;">
+  <h4><a href="{% url 'movies:detail' movie.pk %}">영화제목: {{movie.title}}</a></h4>
+  <h4>평점: {{movie.vote_average}}</h4>
+  <h4>개봉일: {{movie.release_date}}</h4>
+  <h4>
+    장르:
+    {% for genre in movie.genres.all %}
+      {{ genre.name }}
+    {% endfor %}
+  </h4>
+  <hr>
+  
+  {% endfor %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>추천영화</h1>
+  <h1>{{ genre_pk }}</h1>
+  <h3>장르별 추천 영화</h3>
+  {% for genre in genres %}
+  <button id="genre_search-{{genre.pk}}" class="m-1">
+      <a href="{{genre.pk}}">{{genre.name}}</a>
+  </button>
+  {% endfor %}
+<div>
+  {% for m in movie_lst %}
+    <p><a href="{% url 'movies:detail'  m.pk %}">{{ m.title }}</a></p>
+    <hr>
+  {% endfor %}
+
+  
+</div>
+  
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const 
+  const adventure = document.querySelector('#genre_search-${}')
+</script> 
+{% endblock %}
+
