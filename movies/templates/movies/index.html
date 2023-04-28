@@ -2,31 +2,33 @@
 
 {% block content %}
   <h1>Movies</h1>
-  {% comment %} {% for genre in genres %}
-    <button class="m-1">
-      <a href="{% url 'movies:recommended' genre.pk %}">
-        {{genre.name}}
-      </a>
-    </button> {% endcomment %}
-    {% comment %} <button class="m-1">
-      <a href="{% url 'movies:recommended' %}">
-        {{genre.name}}
-      </a>
-    </button> {% endcomment %}
-  {% comment %} {% endfor %} {% endcomment %}
-  <br>
-  {% for movie in movies %}
-  <img src="{{movie.poster_path}}" alt="" style="width: 200px; height: 300px;">
-  <h4><a href="{% url 'movies:detail' movie.pk %}">영화제목: {{movie.title}}</a></h4>
-  <h4>평점: {{movie.vote_average}}</h4>
-  <h4>개봉일: {{movie.release_date}}</h4>
-  <h4>
-    장르:
-    {% for genre in movie.genres.all %}
-      {{ genre.name }}
-    {% endfor %}
-  </h4>
-  <hr>
+
+      
+  <!-- 카드 예시 -->
   
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for movie in movies %}
+      <div class="col">
+        <div class="card h-100">
+          <img src="{{movie.poster_path}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a style="text-decoration:none" class="fw-bold text-secondary" href="{% url 'movies:detail' movie.pk %}">
+                영화제목: {{movie.title}}
+              </a></h5>
+            <p class="card-text">
+              평점: {{movie.vote_average}}
+              <h4>
+                장르:
+                {% for genre in movie.genres.all %}
+                  {{ genre.name }}
+                {% endfor %}
+              </h4>
+            </p>
+          </div>
+        </div>
+      </div>
   {% endfor %}
+</div>
+  
 {% endblock %}
